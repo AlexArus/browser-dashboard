@@ -1,0 +1,25 @@
+{
+  "name": "Arus Dashboard",
+  "version": "2021.2.19",
+  "description": "Chrome pluging Arus Dashboard to replace home page and make search of bookmarks, history and tabs easy",
+  "manifest_version": 2,
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": [
+    "bookmarks",
+    "topSites",
+    "tabs",
+    "history",
+    "chrome://favicon/"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'; img-src chrome://favicon;",
+  "icons": {
+    "16": "favicon.svg",
+    "32": "favicon.svg",
+    "48": "favicon.svg",
+    "128": "favicon.svg"
+  },
+  "homepage_url": "https://github.com/ArusSoft/ext-dashboard",
+  "author": "Alex Arus"
+}

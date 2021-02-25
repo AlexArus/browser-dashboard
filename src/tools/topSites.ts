@@ -1,4 +1,4 @@
-import { isExtensionEnv } from 'utils/common';
+import { isExtensionEnv } from 'utils/chrome';
 import { standaloneTopSites } from 'utils/standaloneData';
 
 export const getTopSites = (

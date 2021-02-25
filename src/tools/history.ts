@@ -1,5 +1,5 @@
 import { HistoryItem } from 'types/history';
-import { isExtensionEnv } from 'utils/common';
+import { isExtensionEnv } from 'utils/chrome';
 import { standaloneHistory } from 'utils/standaloneData';
 
 const microsecondsPerWeek = 1000 * 60 * 60 * 24 * 7;
@@ -18,8 +18,10 @@ export const getHistory = (
   }
 };
 
-export const chromeHistoryToHistory = (item: chrome.history.HistoryItem): HistoryItem => ({
+export const chromeHistoryToHistory = (
+  item: chrome.history.HistoryItem
+): HistoryItem => ({
   title: item.title ?? 'no title',
   url: item.url ?? 'no url',
   lastVisitTime: item.lastVisitTime ?? 0,
-})
+});

@@ -1,5 +1,5 @@
 import { TabItem } from 'types/tab';
-import { isExtensionEnv } from 'utils/common';
+import { isExtensionEnv } from 'utils/chrome';
 import { standaloneTabs } from 'utils/standaloneData';
 
 export const getTabs = (callback: (data: Array<chrome.tabs.Tab>) => void) => {

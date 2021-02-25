@@ -1,5 +1,3 @@
-export const isExtensionEnv = Boolean(chrome?.permissions);
-
 export type UpdateObj<T extends {}> = (data: T, update: Partial<T>) => T;
 
 export const updateObj = <T extends {}>(data: T, update: Partial<T>): T => ({

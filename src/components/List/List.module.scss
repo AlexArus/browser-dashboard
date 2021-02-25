@@ -1,0 +1,13 @@
+.container {
+  min-width: 200px;
+  padding: 3px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 16px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid silver;
+}

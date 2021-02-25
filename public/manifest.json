@@ -1,6 +1,6 @@
 {
   "name": "Arus Dashboard",
-  "version": "2021.2.19",
+  "version": "2021.2.25",
   "description": "Chrome pluging Arus Dashboard to replace home page and make search of bookmarks, history and tabs easy",
   "manifest_version": 2,
   "chrome_url_overrides": {

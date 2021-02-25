@@ -1,0 +1,35 @@
+.container {
+  padding: 3px;
+  min-width: 100px;
+  cursor: pointer;
+
+  a {
+    display: flex;
+    color: black;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: blue;
+  }
+}
+
+.icon {
+  overflow: hidden;
+  margin: 3px;
+  height: 16px;
+  min-height: 16px;
+  width: 16px;
+  min-width: 16px;
+}
+
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.placeholder {
+  color: gray;
+}

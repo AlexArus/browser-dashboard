@@ -1,10 +1,18 @@
 import React, { ChangeEvent, useCallback, useEffect } from 'react';
+import { Link, LinkProps } from 'components/Link/Link';
+import { TopSites } from 'components/TopSites/TopSites';
+import { maxItems } from 'const';
 import { FC } from 'react';
 import { useStore, useDispatch } from 'store';
 import { setSearchStringAction } from 'store/app';
-import { isExtensionEnv } from 'utils/common';
+import { getFavIconUrl } from 'utils/chrome';
 
 import styles from './Page.module.scss';
+import { Footer } from 'components/Footer/Footer';
+import { List } from 'components/List/List';
+import { ClockIcon } from 'components/icons/ClockIcon';
+import { BookmarkIcon } from 'components/icons/BookmarkIcon';
+import { TabIcon } from 'components/icons/TabIcon';
 
 export const Page: FC = React.memo(() => {
   const store = useStore();
@@ -21,72 +29,94 @@ export const Page: FC = React.memo(() => {
     [dispatch]
   );
 
+  const onTabClick = useCallback(
+    (link: LinkProps<number>) => {
+      if (link.id) {
+        const tab = store.tabs.tabs.find((tab) => tab.id === link.id);
+        if (tab) {
+          chrome.tabs.highlight({ tabs: [tab.index] });
+        }
+      }
+    },
+    [store]
+  );
+
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <div>categories</div>
-        <input
-          value={store.app.searchString}
-          placeholder="Search..."
-          onChange={onSearchChange}
-        />
-        <div>options</div>
+        <TopSites />
+        <div className={styles.search}>
+          <input
+            value={store.app.searchString}
+            placeholder="Search..."
+            onChange={onSearchChange}
+          />
+        </div>
       </header>
       <section className={styles.content}>
-        <section>
-          bookmarks
-          {store.bookmarks.bookmarks.map((bookmark) => (
-            <p>
-              <img
-                src={`chrome://favicon/${bookmark.url}`}
-                alt={bookmark.title}
-              />
-              <a href={bookmark.url}>{bookmark.title}</a>
-            </p>
-          ))}
-        </section>
-        <section>
-          history
-          {store.history.history.map((history) => (
-            <p>
-              <img
-                src={`chrome://favicon/${history.url}`}
-                alt={history.title}
-              />
-              <a href={history.url}>{history.title}</a>
-            </p>
-          ))}
-        </section>
-        <section>
-          tabs
-          {store.tabs.tabs.map((tab) => (
-            <p>
-              <img src={`chrome://favicon/${tab.favIconUrl}`} alt={tab.title} />
-              {tab.title}
-            </p>
-          ))}
-        </section>
-        <section>
-          topSites
-          {store.topSites.topSites.map((topSite) => (
-            <p>
-              <img
-                src={`chrome://favicon/${topSite.url}`}
-                alt={topSite.title}
-              />
-              <a href={topSite.url}>{topSite.title}</a>
-            </p>
-          ))}
-        </section>
+        <List
+          title={
+            <>
+              <TabIcon />
+              &nbsp; Tabs
+            </>
+          }
+          items={store.tabs.tabs.slice(0, maxItems)}
+        >
+          {(tabItem) => (
+            <Link
+              className={styles.linkContainer}
+              key={tabItem.id}
+              id={tabItem.id}
+              iconUrl={getFavIconUrl(tabItem.favIconUrl)}
+              name={tabItem.title}
+              onClick={onTabClick}
+            />
+          )}
+        </List>
+
+        <List
+          className={styles.bookmarkBlock}
+          title={
+            <>
+              <BookmarkIcon />
+              &nbsp; Bookmarks
+            </>
+          }
+          items={store.bookmarks.bookmarks.slice(0, maxItems)}
+        >
+          {(bookmarkItem) => (
+            <Link
+              className={styles.linkContainer}
+              key={bookmarkItem.id}
+              iconUrl={getFavIconUrl(bookmarkItem.url)}
+              name={bookmarkItem.title}
+              url={bookmarkItem.url}
+            />
+          )}
+        </List>
+
+        <List
+          title={
+            <>
+              <ClockIcon />
+              &nbsp; History
+            </>
+          }
+          items={store.history.history.slice(0, maxItems)}
+        >
+          {(historyItem) => (
+            <Link
+              className={styles.linkContainer}
+              key={historyItem.lastVisitTime}
+              iconUrl={getFavIconUrl(historyItem.url)}
+              name={historyItem.title}
+              url={historyItem.url}
+            />
+          )}
+        </List>
       </section>
-      <footer className={styles.footer}>
-        <p>Bookmarks: {store.bookmarks.bookmarks.length}</p>
-        <p>History: {store.history.history.length}</p>
-        <p>Tabs: {store.tabs.tabs.length}</p>
-        <p>TopSites: {store.topSites.topSites.length}</p>
-        <p>Version: {process.env.REACT_APP_VERSION}</p>
-        {!isExtensionEnv && <p>Stand alone mode</p>}
-      </footer>
+      <Footer />
     </main>
   );
 });

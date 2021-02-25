@@ -1,5 +1,5 @@
 import { standaloneBookmarks } from 'utils/standaloneData';
-import { isExtensionEnv } from 'utils/common';
+import { isExtensionEnv } from 'utils/chrome';
 import { BookmarkItem } from 'types/bookmark';
 
 export const getBookmarks = (
@@ -15,6 +15,7 @@ export const getBookmarks = (
 export const chromeBookmarkTreeNodeToBookmark = (
   item: chrome.bookmarks.BookmarkTreeNode
 ): BookmarkItem => ({
+  id: item.id,
   title: item.title,
   url: item.url ?? 'no url',
 });

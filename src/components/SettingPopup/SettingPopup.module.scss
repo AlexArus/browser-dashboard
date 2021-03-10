@@ -1,0 +1,45 @@
+.container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(gray, 0.7);
+  height: 100%;
+  width: 100%;
+
+  .popup {
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 3px 3px 5px black;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5px 5px 15px;
+      border-bottom: 1px solid silver;
+      color: gray;
+      font-weight: bold;
+    }
+
+    .closeButton {
+      flex-shrink: 1;
+      padding-left: 5px;
+      cursor: pointer;
+
+      svg {
+        fill: silver;
+        height: 25px;
+        width: 25px;
+      }
+    }
+
+    .content {
+      padding: 5px 25px;
+    }
+
+    .value {
+      float: right;
+    }
+  }
+}

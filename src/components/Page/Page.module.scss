@@ -7,25 +7,35 @@
   min-width: 200px;
 }
 
-.search {
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid silver;
   height: 45px;
   margin-bottom: 10px;
+}
 
-  input {
-    font-size: 28px;
-    text-align: center;
-    flex-grow: 1;
-    margin: 0 8px;
-    border: 0;
-    outline: 0;
-    caret-color: gray;
-    height: 100%;
-    width: 100%;
-    min-width: 100px;
+.search {
+  flex-grow: 1;
+  font-size: 28px;
+  text-align: center;
+  flex-grow: 1;
+  margin: 0 8px;
+  border: 0;
+  outline: 0;
+  caret-color: gray;
+  min-width: 100px;
+}
+
+.settingButton {
+  padding: 5px;
+  cursor: pointer;
+
+  svg {
+    fill: silver;
+    height: 25px;
+    width: 25px;
   }
 }
 

@@ -1,3 +1,3 @@
 import { Action } from 'types/action';
 
-export type Dispatch = React.Dispatch<Action<any>>;
+export type Dispatch<T = any> = React.Dispatch<Action<T>>;
